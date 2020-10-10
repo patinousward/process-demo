@@ -32,14 +32,14 @@ class Test01 {
       println(is.next())
     }
     //异步等2s去 destroy
-    /*new Thread(new Runnable {
+    new Thread(new Runnable {
       override def run(): Unit = {
         Thread.sleep(100)
         process.destroyForcibly()//可能在继承sleep期间，无法进行destroy
         println(process.isAlive)
         println("destroy end")
       }
-    }).start()*/
+    }).start()
 
     val exitCode = Option(process.waitFor)
     println(exitCode)
