@@ -32,14 +32,14 @@ class Test01 {
       println(is.next())
     }
     //异步等2s去 destroy
-    new Thread(new Runnable {
+    /*new Thread(new Runnable {
       override def run(): Unit = {
         Thread.sleep(100)
         process.destroyForcibly()//可能在继承sleep期间，无法进行destroy
         println(process.isAlive)
         println("destroy end")
       }
-    }).start()
+    }).start()*/
 
     val exitCode = Option(process.waitFor)
     println(exitCode)
@@ -47,7 +47,7 @@ class Test01 {
     //1.命令自己重定向后，process获取inputstream没有值
     //2.java执行shell命令去启动另外一个java服务，会等main方法执行完成后才返回process,而且main方法报错，会导致process
     //3.java main 方法指定的退出码会返回个process
-
+    //4.kill -9 会触发waitFor结束
     //http://www.bubuko.com/infodetail-1467743.html
     //输出流导致死锁
     //https://blog.csdn.net/shadow_zed/article/details/99636760?utm_medium=distribute.pc_relevant.none-task-blog-title-3&spm=1001.2101.3001.4242
